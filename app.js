@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000;
 
 // Default page route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
 // route and logic for register
