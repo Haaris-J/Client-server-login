@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 const data = require('./dataModel');
 
 // initiating express() to app and set use
@@ -21,8 +22,20 @@ app.get('/', (req, res) => {
 });
 
 // route and logic for register
-app.post('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+app.post('/register', async(req, res) => {
+    const { username, secretcode, password, email, answer1, answer2 } = req.body;
+    console.log(`${username} ${secretcode} ${password} ${email} ${answer1} ${answer2}`);
+    try {
+        const hashedsecretcode = await bcrypt.hash(secretcode, 1);
+        console.log(`${hashedsecretcode}`);
+        const hashedPassword = await bcrypt.hash(password, 1);
+        console.log(`${hashedPassword}`);
+        await data.create({ username, secretcode: hashedsecretcode, password: hashedPassword, email, answer1, answer2 });
+        res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(`<h1 style="color:red;">Registration failed!</h1><br><a href="http://localhost:${PORT}/">Return to website</a>`);
+    }
 });
 
 // route and logic for login
