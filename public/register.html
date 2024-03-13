@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client-server-login</title>
 </head>
+
 <body>
-    
+    <a href="index.html">Home</a>
+    <h1>Add item</h1>
+    <form action="http://localhost:3000/register" method="post">
+        <label>User Name:</label> <input type="text" name="username" id="username"><br>
+        <label>Secret Code:</label> <input type="password" name="secretcode" id="secretcode"><br>
+        <label>Password:</label> <input type="password" name="password" id="password"><br>
+        <label>email:</label> <input type="email" name="email" id="email"><br>
+        <label>Security Questions:</label><br>
+        <label>Which city do you reside in?</label> <input type="text" name="answer1" id="answer1"><br>
+        <label>Which school did you attend?</label> <input type="text" name="answer2" id="answer2"><br>
+        <button type="submit">register</button>
+    </form>
 </body>
+
 </html>
